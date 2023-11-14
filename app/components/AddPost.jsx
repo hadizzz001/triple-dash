@@ -51,10 +51,10 @@ const AddPost = () => {
         })
         .finally(() => {
           setInputs({});
-          setModalOpen(false);
-          router.refresh();
+          setModalOpen(false); 
           setSearch(false)
 		  setActive(false)
+      window.location.replace("/dashboard");
         });
     }
   };

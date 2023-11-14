@@ -40,8 +40,8 @@ const page = async () => {
             .catch((err:any) => {
                 console.log(err);
             })
-            .finally(() => { 
-                push("/reservation");
+            .finally(() => {  
+                window.location.replace("/dashboard");
             }); 
         } else {  }
         
@@ -50,10 +50,7 @@ const page = async () => {
     const posts = await getData();
  
 
-        process.on('uncaughtException', function (err) {
-            console.log("errrrrrrrrrrrrrrrrrrrrrrrrrr");
-            console.log(err);
-        }); 
+ 
 
 
 
@@ -87,7 +84,7 @@ const page = async () => {
                         posts.map((post: any, index: any) => (
                             <tr>
                                 <td>{index+1}</td>
-                                <td>{post.firstname}</td>
+                                <td>{post.firstname}</td> 
                                 <td>{post.lastname}</td>
                                 <td>{post.email}</td>
                                 <td>{post.phone}</td>

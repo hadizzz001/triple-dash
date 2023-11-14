@@ -34,7 +34,7 @@ const Post = ({ post }) => {
       .finally(() => {
         setOpenModalEdit(false);
         setActive(false)
-        router.refresh();
+        window.location.replace("/dashboard");
       });
     }
   };
@@ -54,9 +54,9 @@ const Post = ({ post }) => {
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => {
+      .finally(() => { 
         setOpenModalEdit(false);
-        router.refresh();
+        window.location.replace("/dashboard");
       });
   }
 

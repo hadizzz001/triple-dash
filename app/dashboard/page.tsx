@@ -2,26 +2,23 @@
 
 import AddPost from './../components/AddPost'
 import PostList from './../components/PostList' 
+import { fetchTemp } from './../utils'
+import { useState, useEffect } from "react";
 
-
-
-
-
-async function getData() {
-  const res = await fetch("http://localhost:3000/api/posts", { cache: 'no-store' });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data")
-  }
-  return res.json();
-} 
-
-
-
-const Crud = async () => {
-  const posts = await getData();
  
 
+const dashboard = () => {
+  const [allTemp, setTemp] = useState<any>() 
 
+  const a = async () => { 
+      const b = await fetchTemp() 
+      setTemp(b)  
+  }
+  useEffect(() => {
+      a()
+  }, []) 
+ 
+   
 
 
   return (
@@ -30,11 +27,19 @@ const Crud = async () => {
         <h1 className='text-3xl font-bold'>Admin Dashbaord</h1>
 
         <AddPost />
-      </div>
+      </div>  
+      {
+      allTemp && allTemp?.length > 0 ? (
+      <PostList posts={allTemp} />
+      ) : (
+        <div className='home___error-container'>
+            <h2 className='text-black text-xl dont-bold'>...</h2>
 
-      <PostList posts={posts} />
+        </div>
+    )
+    }
     </div>
   )
 }
 
-export default Crud
+export default dashboard

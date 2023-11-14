@@ -1,19 +1,23 @@
 import AddPost from '../components/AddPost'
 import PostList from '../components/PostList'
+import { fetchTemp } from './../utils'
+import { useState, useEffect } from "react";
 
-async function getData() {
-    const res = await fetch("http://localhost:3000/api/posts", { cache: 'no-store' });
+ 
 
-    if(!res.ok) {
-        throw new Error("Failed to fetch data")
-    }
 
-    return res.json();
-}
 
 const Crud = async () => {
 
-    const posts = await getData();
+    const [allTemp, setTemp] = useState<any>()
+
+    const a = async () => { 
+        const b = await fetchTemp()  
+        setTemp(b) 
+    }
+    useEffect(() => {
+        a()
+    }, [])
 
   return (
     <div className='max-w-4xl mx-auto mt-4'>
@@ -22,7 +26,7 @@ const Crud = async () => {
             <AddPost />
         </div>
 
-        <PostList posts={posts} />
+        <PostList posts={allTemp} />
     </div>
   )
 }

@@ -17,10 +17,8 @@ export default function Home() {
     try {
       const { data } = await axios.post("/api/auth/login", payload);
 
-      alert(JSON.stringify(data));
-
-      // redirect the user to /dashboard
-      push("/dashboard");
+      alert(JSON.stringify(data)); 
+      window.location.replace("/dashboard");
     } catch (e) {
       const error = e as AxiosError;
 

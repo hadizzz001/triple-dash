@@ -1,13 +1,14 @@
 import Post from '../components/Post'
 
-const PostList = ({posts}) => {
+const PostList = ({ posts }) => {
   return (
     <ul>
-        {
-            posts.map(post => (
-                <Post key={post.id} post={post} />
-            ))
-        }
+      {
+        posts.map(post => (
+          <Post key={post.id} post={post} />
+        ))
+
+      }
     </ul>
   )
 }
