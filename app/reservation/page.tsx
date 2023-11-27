@@ -10,11 +10,14 @@ import { useState, useEffect } from "react";
 
 
 
-const page = async () => {
+const page = () => {
     const [allTemp, setTemp] = useState<any>()
+    const router = useRouter()
 
     const a = async () => {
         const b = await fetchTemp1()
+        console.log(allTemp);
+        
         setTemp(b)
     }
     useEffect(() => {
@@ -36,7 +39,7 @@ const page = async () => {
                     console.log(err);
                 })
                 .finally(() => {
-                    window.location.replace("/dashboard");
+                    location.replace('/reservation')
                 });
         } else { }
 
