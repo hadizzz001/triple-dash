@@ -32,4 +32,5 @@ export async function saveToDatabase({ public_id, version, signature }) {
   if (expectedSignature === signature) { 
     console.log({ public_id })
   }
+  console.log("DONEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 }

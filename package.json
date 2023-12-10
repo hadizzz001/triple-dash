@@ -38,5 +38,10 @@
     "@types/react": "18.2.33",
     "prisma": "^5.6.0",
     "typescript": "5.2.2"
+  }, 
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }

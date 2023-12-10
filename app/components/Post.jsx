@@ -1,19 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Modal from "./Modal";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import UploadPDF from './../components/UploadPDF'
 
 const Post = ({ post }) => {
-  const router = useRouter();
-
+  const router = useRouter(); 
   const [openModalEdit, setOpenModalEdit] = useState(false);
   const [postToEdit, setPostToEdit] = useState(post);
+  const [postToEdit1, setPostToEdit1] = useState();
   const [active, setActive] = useState(false)
-
+  const [modalOpen, setModalOpen] = useState(false); 
   const [openModalDelete, setOpenModalDelete] = useState(false);
+  const [openModalDelete1, setOpenModalDelete1] = useState(false);
+  const [pdfid, setPdf] = useState(); 
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
@@ -23,19 +26,19 @@ const Post = ({ post }) => {
     }
     else {
       setActive(true)
-    axios
-      .patch(`/api/posts/${post.id}`, postToEdit)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setOpenModalEdit(false);
-        setActive(false)
-        window.location.replace("/dashboard");
-      });
+      axios
+        .patch(`/api/posts/${post.id}`, postToEdit)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setOpenModalEdit(false);
+          setActive(false)
+          window.location.replace("/dashboard");
+        });
     }
   };
 
@@ -54,11 +57,42 @@ const Post = ({ post }) => {
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => { 
+      .finally(() => {
         setOpenModalEdit(false);
         window.location.replace("/dashboard");
       });
   }
+
+
+
+  useEffect(() => { 
+    axios
+      .patch(`/api/posts/${pdfid}`, postToEdit1)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setOpenModalDelete1(false); 
+      });
+  }, [postToEdit1, pdfid]);
+
+
+  const handleDeletePost1 = (id) => {
+    setPdf(id)
+    setPostToEdit1({
+      pdf: ""
+    })
+  }
+
+
+
+
+
+
+
 
   return (
     <li className="p-3 my-5 bg-slate-200" key={post.id}>
@@ -74,6 +108,8 @@ const Post = ({ post }) => {
         >
           Edit
         </button>
+
+
 
         <Modal modalOpen={openModalEdit} setModalOpen={setOpenModalEdit}>
           <form className="w-full" onSubmit={handleEditSubmit}>
@@ -123,7 +159,7 @@ const Post = ({ post }) => {
               onClick={() => handleDeletePost(post.id)}
               className="text-blue-700 font-bold mr-5"
             >
-              YES
+              Yes
             </button>
             <button
               onClick={() => setOpenModalDelete(false)}
@@ -133,6 +169,44 @@ const Post = ({ post }) => {
             </button>
           </div>
         </Modal>
+
+
+        <button
+          style={{ float: "inline-end" }}
+          onClick={() => setModalOpen(true)}
+          className="text-blue-700 mr-3"
+        >
+          Add PDF
+        </button>
+        <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
+          <UploadPDF postid={post.id} />
+        </Modal>
+
+
+        <button onClick={() => setOpenModalDelete1(true)} className="text-red-700 mr-3" style={{ float: "inline-end" }}>Delete PDF</button>
+
+        <Modal modalOpen={openModalDelete1} setModalOpen={setOpenModalDelete1}>
+          <h1 className="text-2xl pb-3">
+            Are you sure, You want to delete PDF of this post?
+          </h1>
+
+          <div>
+            <button
+              onClick={() => handleDeletePost1(post.id)}
+              className="text-blue-700 font-bold mr-5"
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => setOpenModalDelete1(false)}
+              className="text-red-700 font-bold mr-5"
+            >
+              No
+            </button>
+          </div>
+        </Modal>
+
+
       </div>
     </li>
   );

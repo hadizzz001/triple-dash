@@ -16,6 +16,7 @@ model Post {
   description String?
   img String?
   type String
+  pdf String? @default("None")
 }
 
 

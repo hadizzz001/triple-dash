@@ -1,11 +1,11 @@
 import React from 'react'
-import UploadImage from '../components/UploadImage'
+import UploadImage from '../components/UploadImage' 
 
 const page = () => {
   return (
     <div>
         <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
-            <UploadImage/>
+            <UploadImage/> 
         </Modal>
     </div>
   )
