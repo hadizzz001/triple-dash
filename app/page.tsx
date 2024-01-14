@@ -55,7 +55,7 @@ export default function Home() {
         <button
           type="submit"
           className="p-2 text-white w-fit rounded"
-          style={{background:"#6c3429"}}
+          style={{background:"#6c3429",color:"white",display:"block",marginBlock:"inherit"}}
         >
           Submit
         </button>

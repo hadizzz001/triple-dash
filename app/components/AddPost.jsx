@@ -116,7 +116,7 @@ const AddPost = () => {
               <option value="personal">Personal Insurance</option>
             </select>
 
-            <button type="submit" className="px-5 py-2" style={{background:"#6c3429"}} disabled={active}>
+            <button type="submit" className="px-5 py-2" style={{background:"#6c3429",color:"white",display:"block",marginBlock:"inherit"}} disabled={active}>
               Submit
             </button>
           </form>
