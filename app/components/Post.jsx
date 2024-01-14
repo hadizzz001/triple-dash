@@ -113,7 +113,7 @@ const Post = ({ post }) => {
 
         <Modal modalOpen={openModalEdit} setModalOpen={setOpenModalEdit}>
           <form className="w-full" onSubmit={handleEditSubmit}>
-            <h1 className="text-2xl pb-3">Add New Post</h1>
+            <h1 className="text-2xl pb-3">Edit Service</h1>
 
             <input
               type="text"
