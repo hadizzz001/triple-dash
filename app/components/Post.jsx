@@ -26,6 +26,8 @@ const Post = ({ post }) => {
     }
     else {
       setActive(true)
+      console.log("Medlej: ",postToEdit);
+      
       axios
         .patch(`/api/posts/${post.id}`, postToEdit)
         .then((res) => {

@@ -28,7 +28,7 @@ export const GET = async (request, { params }) => {
 export const PATCH = async (request, {params}) => {
     try {
         const body = await request.json();
-        const {title, description, pdf} = body; 
+        const {title, description,type, pdf} = body; 
         const {id} = params;
 
         const updatePost = await prisma.post.update({
@@ -38,6 +38,7 @@ export const PATCH = async (request, {params}) => {
             data: {
                 title,
                 description,
+                type,
                 pdf
             }
         })
