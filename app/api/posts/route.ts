@@ -84,7 +84,7 @@ export const GET = async (req: Request, res: NextResponse) => {
 export const POST = async (req: Request, res: NextResponse) => {
     try {
         const {title, description, img, type} = await req.json();
-
+ 
         await main();   
         const post = await prisma.post.createMany({ data: {title, description, img, type} });  
         return NextResponse.json({ message: "Success", post }, { status: 201 })

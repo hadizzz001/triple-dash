@@ -15,7 +15,7 @@ const AddPost = () => {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [search, setSearch] = useState(false);
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({type: "business"});
   const [active, setActive] = useState(false);
 
   if (typeof window !== "undefined") {
@@ -25,11 +25,13 @@ const AddPost = () => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     if (e.target.type.value === "0") {
       alert("Please fill insurance type");
     } else {
       setActive(true);
+      console.log("medlej: ",inputs);
+      
       axios
         .post("/api/posts", inputs)
         .then((res) => {
