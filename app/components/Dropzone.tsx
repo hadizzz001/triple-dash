@@ -1,4 +1,4 @@
- 
+ "use client"
 import { Box } from "@mui/system";
 import {FilesUpload, FileUpload, Widget} from "@uploadcare/react-widget";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
