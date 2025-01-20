@@ -23,9 +23,7 @@ const Post = ({ post }) => {
   const handleEditSubmit = (e) => {
     e.preventDefault();
 
-    if (e.target.type.value === "0") {
-      alert("Please fill insurance type");
-    } else {
+   
       setActive(true);
       axios
         .patch(`/api/posts/${post.id}`, postToEdit)
@@ -40,7 +38,7 @@ const Post = ({ post }) => {
           setActive(false);
           window.location.replace("/dashboard");
         });
-    }
+     
   };
 
   const handleChange = (e) => {
@@ -99,7 +97,6 @@ const Post = ({ post }) => {
   return (
     <li className="p-3 my-5 bg-slate-200" key={post.id}>
       <h1 className="text-2xl font-bold">{post.title}</h1>
-      <b>{post.type}</b>
       <p dangerouslySetInnerHTML={{ __html: post.description }}></p>
 
       <div className="pt-5">
@@ -133,7 +130,7 @@ const Post = ({ post }) => {
               placeholder="Write your description here..."
             />
 
-            <select
+            {/* <select
               name="type"
               id="type"
               value={postToEdit.type || "0"}
@@ -145,7 +142,7 @@ const Post = ({ post }) => {
               </option>
               <option value="business">Business Insurance</option>
               <option value="personal">Personal Insurance</option>
-            </select>
+            </select> */}
 
             <button
               type="submit"

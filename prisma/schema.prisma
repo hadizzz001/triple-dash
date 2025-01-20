@@ -14,7 +14,7 @@ model Post {
   id  String @id @default(auto()) @map("_id") @db.ObjectId
   title String?
   description String?
-  img String?
+  img String[]
   type String
   pdf String? @default("None")
 }

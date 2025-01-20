@@ -2,33 +2,31 @@
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import axios from "axios";
-import { useRouter } from 'next/navigation'
-import { getSignature, saveToDatabase } from '../_actions'
-import UploadImage from "./UploadImage";
-import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation' 
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
+import Dropzone from './Dropzone'
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const AddPost = () => {
   const router = useRouter();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [search, setSearch] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false); 
   const [inputs, setInputs] = useState({type: "business"});
   const [active, setActive] = useState(false);
+  const [imgs, setImgs] = useState([''])
 
-  if (typeof window !== "undefined") {
-    window.addEventListener('storage', () => {
-      setSearch(true);
-    });
-  }
+ 
+
+
+  useEffect(() => {
+    setInputs((prevState) => ({ ...prevState, img: imgs }));
+  }, [imgs])
+
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    if (e.target.type.value === "0") {
-      alert("Please fill insurance type");
-    } else {
+      
       setActive(true);
       console.log("medlej: ",inputs);
       
@@ -42,12 +40,11 @@ const AddPost = () => {
         })
         .finally(() => {
           setInputs({});
-          setModalOpen(false);
-          setSearch(false);
+          setModalOpen(false); 
           setActive(false);
           window.location.replace("/dashboard");
         });
-    }
+     
   };
 
   const handleChange = (e) => {
@@ -55,9 +52,16 @@ const AddPost = () => {
     setInputs((prevState) => ({
       ...prevState,
       [name]: value,
-      img: "https://res.cloudinary.com/dixtwo21g/image/upload/v1696411482/" + localStorage.getItem("sharedValue") + ".jpg",
+      img: localStorage.getItem("sharedValue")
     }));
   };
+
+
+  const handleImgChange = (url) => {
+    if (url) { 
+      setImgs(url); 
+    }
+  }
 
   const handleQuillChange = (value) => {
     setInputs((prevState) => ({
@@ -85,8 +89,8 @@ const AddPost = () => {
       </button>
 
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        {!search && <UploadImage />}
-        {search && (
+       
+        
           <form className="w-full mt-5" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -107,13 +111,15 @@ const AddPost = () => {
               placeholder="Write your description here..."
             />
 
-            <select name="type" id="type" onChange={handleChange} required>
+            {/* <select name="type" id="type" onChange={handleChange} required>
               <option value="0" disabled>
                 --Choose Option--
               </option>
               <option value="business">Business Insurance</option>
               <option value="personal">Personal Insurance</option>
-            </select>
+            </select> */}
+
+<Dropzone HandleImagesChange={handleImgChange} className='mt-10 border border-neutral-200 p-16'  />
 
             <button
               type="submit"
@@ -129,7 +135,7 @@ const AddPost = () => {
               Submit
             </button>
           </form>
-        )}
+         
       </Modal>
     </div>
   );
