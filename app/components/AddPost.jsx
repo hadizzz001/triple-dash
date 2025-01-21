@@ -74,10 +74,24 @@ const AddPost = () => {
     <div>
       <button
         onClick={() => setModalOpen(true)}
-        className="text-white p-3 cursor-pointer"
+        className="text-white m-3  p-3 cursor-pointer"
         style={{ background: "#6c3429" }}
       >
         Add New Insurance
+      </button>
+      <button
+        onClick={() => router.push("/about")}
+        className="text-white p-3 m-3 cursor-pointer"
+        style={{ background: "#6c3429" }}
+      >
+        Edit About
+      </button>
+      <button
+        onClick={() => router.push("/contact")}
+        className="text-white p-3 m-3 cursor-pointer"
+        style={{ background: "#6c3429" }}
+      >
+        Edit Contact
       </button>
 
       <button
@@ -118,7 +132,12 @@ const AddPost = () => {
               <option value="business">Business Insurance</option>
               <option value="personal">Personal Insurance</option>
             </select> */}
-
+<style
+        dangerouslySetInnerHTML={{
+          __html:
+            "\n  .uploadcare--widget {\n    background:black;\n  }\n  "
+        }}
+      />
 <Dropzone HandleImagesChange={handleImgChange} className='mt-10 border border-neutral-200 p-16'  />
 
             <button

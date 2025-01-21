@@ -31,3 +31,20 @@ model Order {
   type String? @default("None")
   message String? @default("None")
 }
+
+
+
+
+
+model About {
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  description String
+  service Json
+  item Json 
+}
+
+model Contact {
+  id  String @id @default(auto()) @map("_id") @db.ObjectId 
+  description String 
+}

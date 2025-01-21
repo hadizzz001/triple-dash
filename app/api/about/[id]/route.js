@@ -1,4 +1,4 @@
-// url: http://localhost:3000/api/posts/12345
+ 
 import prisma from "../../../libs/prismadb";
 import { NextResponse } from "next/server";
 
@@ -6,7 +6,7 @@ export const GET = async (request, { params }) => {
   try {
     const { id } = params;
 
-    const post = await prisma.post.findUnique({
+    const post = await prisma.about.findUnique({
         where: {
             id
         }
@@ -28,19 +28,15 @@ export const GET = async (request, { params }) => {
 export const PATCH = async (request, {params}) => {
     try {
         const body = await request.json();
-        const {title, description,type, pdf, img} = body; 
+        const {title, description,service, item} = body; 
         const {id} = params;
 
-        const updatePost = await prisma.post.update({
+        const updatePost = await prisma.about.update({
             where: {
                 id
             },
             data: {
-                title,
-                description,
-                type,
-                pdf,
-                img
+                title, description,service, item
             }
         })
 
@@ -58,18 +54,4 @@ export const PATCH = async (request, {params}) => {
     }
 }
 
-export const DELETE = async (request, { params }) => {
-    try {
-      const { id } = params;
-  
-      await prisma.post.delete({
-          where: {
-              id
-          }
-      });
-  
-      return NextResponse.json("Post has been deleted");
-    } catch (err) {
-      return NextResponse.json({ message: "DELETE Error", err }, { status: 500 });
-    }
-  };
+ 

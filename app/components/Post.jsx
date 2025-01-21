@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import UploadPDF from './../components/UploadPDF';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
+import Dropzone from './Dropzone'
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -19,10 +20,18 @@ const Post = ({ post }) => {
   const [openModalDelete, setOpenModalDelete] = useState(false);
   const [openModalDelete1, setOpenModalDelete1] = useState(false);
   const [pdfid, setPdf] = useState();
+  const [imgs, setImgs] = useState([''])
+
+
+
+  useEffect(() => {
+    setPostToEdit((prevState) => ({ ...prevState, img: imgs }));
+  }, [imgs])
+
+
 
   const handleEditSubmit = (e) => {
-    e.preventDefault();
-
+    e.preventDefault(); 
    
       setActive(true);
       axios
@@ -94,6 +103,13 @@ const Post = ({ post }) => {
     });
   };
 
+
+  const handleImgChange = (url) => {
+    if (url) { 
+      setImgs(url); 
+    }
+  }
+
   return (
     <li className="p-3 my-5 bg-slate-200" key={post.id}>
       <h1 className="text-2xl font-bold">{post.title}</h1>
@@ -129,6 +145,14 @@ const Post = ({ post }) => {
               theme="snow"
               placeholder="Write your description here..."
             />
+
+<style
+        dangerouslySetInnerHTML={{
+          __html:
+            "\n  .uploadcare--widget {\n    background:black;\n  }\n  "
+        }}
+      />
+<Dropzone HandleImagesChange={handleImgChange} className='mt-10 border border-neutral-200 p-16'  />
 
             {/* <select
               name="type"
