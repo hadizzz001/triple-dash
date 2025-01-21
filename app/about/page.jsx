@@ -51,6 +51,15 @@ export default function AboutPage() {
     }));
   };
 
+  // Handle deleting a service or item
+  const handleDeleteSection = (index, section) => {
+    const updatedSection = inputs[section].filter((_, i) => i !== index);
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      [section]: updatedSection,
+    }));
+  };
+
   // Handle PATCH request to update the data
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -127,6 +136,13 @@ export default function AboutPage() {
                   placeholder="Enter service description"
                 />
               </div>
+              <button
+                type="button"
+                className="btn btn-outline-danger mt-2"
+                onClick={() => handleDeleteSection(index, "service")}
+              >
+                Delete Service
+              </button>
             </div>
           ))}
           <button
@@ -166,6 +182,13 @@ export default function AboutPage() {
                   placeholder="Enter item description"
                 />
               </div>
+              <button
+                type="button"
+                className="btn btn-outline-danger mt-2"
+                onClick={() => handleDeleteSection(index, "item")}
+              >
+                Delete Item
+              </button>
             </div>
           ))}
           <button
