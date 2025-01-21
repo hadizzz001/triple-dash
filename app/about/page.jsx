@@ -1,9 +1,13 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic"; // Import dynamic from Next.js
+
 import "react-quill/dist/quill.snow.css"; // Import Quill's styles
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap's styles
+
+// Dynamically import ReactQuill to disable SSR
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function AboutPage() {
   const [inputs, setInputs] = useState({

@@ -1,9 +1,13 @@
 "use client"
 
-import { useState, useEffect } from "react";
-import ReactQuill from "react-quill";
+import { useState, useEffect } from "react"; 
 import "react-quill/dist/quill.snow.css";  
-import "bootstrap/dist/css/bootstrap.min.css";  
+import "bootstrap/dist/css/bootstrap.min.css";   
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+
+
 
 export default function AboutPage() {
   const [inputs, setInputs] = useState({ 
