@@ -20,7 +20,7 @@ const Post = ({ post }) => {
   const [openModalDelete, setOpenModalDelete] = useState(false);
   const [openModalDelete1, setOpenModalDelete1] = useState(false);
   const [pdfid, setPdf] = useState();
-  const [imgs, setImgs] = useState([''])
+  const [imgs, setImgs] = useState(post.img)
 
 
 
